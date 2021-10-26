@@ -15,7 +15,7 @@ go get github.com/xuexin520/go-dou-dian-sdk
 
 ##
 ### 订单API
-
+* [func  OrderDetail](#funcOrderDetail)
 
 ### func 描述
 
@@ -39,4 +39,14 @@ func GetAccessToken(appKey string, appSecret string, shopId string) (SAccessToke
 
 Required appKey & appSecret
 Return:  SAccessTokenData, error
+```
+
+###  <a name='funcOrderDetail'></a> func funcOrderDetail
+```
+func OrderDetail(appKey string, appSecret string, shopId string, orderIdParent string) (SDYOrderInfo, error)
+
+note： 
+    订单详情信息获取
+    自动进行 sign 签名并获取填充 accessToken
+Return:  SDYOrderInfo, error
 ```
