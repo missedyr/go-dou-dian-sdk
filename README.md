@@ -39,7 +39,7 @@ Sign 计算签名
 func GetAccessToken(appKey string, appSecret string, shopId string) (SAccessTokenData, error)
 
 note:
-    店铺ID，仅自用型应用有效；
+    shopId(店铺ID)，仅自用型应用有效；
     若不传，则默认返回最早授权成功店铺对应的token信息
     (该方法当前仅支持  自用型应用)
 Return:  SAccessTokenData, error
