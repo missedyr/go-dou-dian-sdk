@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-resty/resty/v2"
-	"github.com/silenceper/log"
+	"github.com/sirupsen/logrus"
 	"github.com/xuexin520/go-dou-dian-sdk/sign"
 	"net/http"
 	"strconv"
@@ -24,7 +24,7 @@ func FetchSignAndToken(method string, appKey string, appSecret string, shopId st
 	// 获取 accessToken
 	accessTokenData, err := GetAccessToken(appKey, appSecret, shopId)
 	if err != nil || len(accessTokenData.AccessToken) == 0 {
-		log.Warnf("douDianSdk-->openHttp-->FetchSignAndToken 请求 method:%s 前置获取accessToken 失败")
+		logrus.Warnf("douDianSdk-->openHttp-->FetchSignAndToken 请求 method:%s 前置获取accessToken 失败")
 	}
 
 	// 执行API调用
@@ -62,7 +62,7 @@ func Fetch(method string, timestamp int64, appKey string, accessToken string, si
 	}
 
 	if err != nil || resp.StatusCode() != http.StatusOK || resp.Body() == nil {
-		log.Warnf("douDianSdk-->openHttp-->Fetch Err url:%s, params: %s, resp: %s, errOrigin: %s", u, params, resp, err)
+		logrus.Warnf("douDianSdk-->openHttp-->Fetch Err url:%s, params: %s, resp: %s, errOrigin: %s", u, params, resp, err)
 		return resp.Body(), err
 	}
 
@@ -77,7 +77,7 @@ func Fetch(method string, timestamp int64, appKey string, accessToken string, si
 
 	if data.ErrNo != 0 {
 		errMsg := fmt.Sprintf("douDianSdk-->openHttp-->Fetch respBodyErr ErrNo:%s, message:%s", data.ErrNo, data.Message)
-		log.Warn(errMsg)
+		logrus.Warn(errMsg)
 		return dataDataByte, errors.New(errMsg)
 	}
 

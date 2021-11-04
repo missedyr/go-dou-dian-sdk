@@ -6,7 +6,6 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -16,7 +15,6 @@ func Sign(appKey string, appSecret string, method string, timestamp int64, param
 	// 按给定规则拼接参数
 	paramPattern := "app_key" + appKey + "method" + method + "param_json" + paramJson + "timestamp" + strconv.FormatInt(timestamp, 10) + "v2"
 	signPattern := appSecret + paramPattern + appSecret
-	fmt.Println("sign_pattern:" + signPattern)
 	return Hmac(signPattern, appSecret)
 }
 

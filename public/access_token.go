@@ -3,18 +3,19 @@ package douDianSdk
 import (
 	"encoding/json"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
-	"github.com/silenceper/log"
+	"github.com/sirupsen/logrus"
 	douDianSdk "github.com/xuexin520/go-dou-dian-sdk/sign"
 	"time"
 )
 
+// GetAccessToken
 // https://op.jinritemai.com/docs/guide-docs/138/21
 func GetAccessToken(appKey string, appSecret string, shopId string) (SAccessTokenData, error) {
 	err := validation.Validate(appKey, validation.Required)
 	err = validation.Validate(appSecret, validation.Required)
 
 	if err != nil {
-		log.Warnf("douDianSdk-->GetAccessToken validation err:", err)
+		logrus.Warnf("douDianSdk-->GetAccessToken validation err:%s", err)
 		return SAccessTokenData{}, err
 	}
 
@@ -36,7 +37,7 @@ func GetAccessToken(appKey string, appSecret string, shopId string) (SAccessToke
 
 	var data SAccessTokenData
 	_ = json.Unmarshal(respBodyData, &data)
-	log.Infof("douDianSdk-->GetAccessToken data:%s", data)
+	logrus.Infof("douDianSdk-->GetAccessToken data:%s", data)
 
 	return data, nil
 }

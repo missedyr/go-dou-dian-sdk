@@ -2,7 +2,7 @@ package douDianSdk
 
 import (
 	"encoding/json"
-	"github.com/silenceper/log"
+	"github.com/sirupsen/logrus"
 	douDianSdk "github.com/xuexin520/go-dou-dian-sdk/public"
 )
 
@@ -18,6 +18,6 @@ func OrderDetail(appKey string, appSecret string, shopId string, orderIdParent s
 
 	var data sRespBodyD
 	_ = json.Unmarshal(respBodyData, &data)
-	log.Infof("douDianSdk-->OrderDetail data:%s", data)
+	logrus.Infof("douDianSdk-->OrderDetail data:%s", data)
 	return data.ShopOrderDetail, err
 }
