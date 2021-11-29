@@ -37,7 +37,8 @@ func GetAccessToken(appKey string, appSecret string, shopId string) (SAccessToke
 
 	var data SAccessTokenData
 	_ = json.Unmarshal(respBodyData, &data)
-	logrus.Infof("douDianSdk-->GetAccessToken data:%s", data)
+	dataByte ,_ := json.Marshal(data)
+	logrus.Infof("douDianSdk-->GetAccessToken data:%s", string(dataByte))
 
 	return data, nil
 }
