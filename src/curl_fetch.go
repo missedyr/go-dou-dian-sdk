@@ -23,7 +23,8 @@ func (cl *DouDianClient) FetchSignAndToken(method string, paramJson map[string]i
 	// 获取 accessToken
 	accessTokenData, err := cl.GetAccessToken()
 	if err != nil || len(accessTokenData.AccessToken) == 0 {
-		logrus.Warnf("douDianSdk-->openHttp-->FetchSignAndToken 请求 method:%s 前置获取accessToken 失败")
+		logrus.Warnf("douDianSdk-->openHttp-->FetchSignAndToken 请求 method:%s 前置获取accessToken 失败 err: %s", method, err)
+		return nil, err
 	}
 
 	// 执行API调用

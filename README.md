@@ -14,51 +14,57 @@ douDianClient.GoodsDetail("商品id", "外部商品id", true) // 获取商品详
 
 ##
 ### 签名算法
-* [func  Marshal](#FuncMarshal)
-* [func  Sign](#FuncSign)
+* [func Sign](#FuncSign)
+* [func SignMarshal](#FuncSignMarshal)
 
 ##
 ### 授权
-* [func  GetAccessToken](#funcGetAccessToken)
+* [func GetAccessToken](#funcGetAccessToken)
 
 ##
 ### 订单API
-* [func  OrderDetail](#funcOrderDetail)
+* [func OrderDetail](#funcOrderDetail)
+
+##
+### 商品API
+* [func GoodsDetail](#funcGoodsDetail)
 
 ##
 ### func 描述
 
-###  <a name='FuncMarshal'></a> func FuncMarshal
-```
-func Marshal(o interface{}) string
-
-Marshal 序列化参数
-```
-
-###  <a name='FuncSign'></a> func FuncSign
+###  <a name='FuncSign'></a> func Sign
 ```
 func Sign(appKey string, appSecret string, method string, timestamp int64, paramJson string) string
 
 Sign 计算签名
 ```
 
+###  <a name='FuncSignMarshal'></a> func SignMarshal
+```
+func SignMarshal(o interface{}) string
+
+Marshal 序列化参数
+```
+
 ###  <a name='funcGetAccessToken'></a> func GetAccessToken
 ```
-func GetAccessToken(appKey string, appSecret string, shopId string) (SAccessTokenData, error)
-
-note:
-    shopId(店铺ID)，仅自用型应用有效；
-    若不传，则默认返回最早授权成功店铺对应的token信息
-    (该方法当前仅支持  自用型应用)
+note: 获取 accessToken
+      该方法当前仅支持  自用型应用
+func GetAccessToken() (SAccessTokenData, error)
 Return:  SAccessTokenData, error
 ```
 
-###  <a name='funcOrderDetail'></a> func funcOrderDetail
+###  <a name='funcOrderDetail'></a> func OrderDetail
 ```
-func OrderDetail(appKey string, appSecret string, shopId string, orderIdParent string) (SDYOrderInfo, error)
+note： 订单详情信息获取
+func OrderDetail(orderIdParent string) (SDYOrderInfo, error)
+Return:  SDYOrderInfo, error
+```
 
-note： 
-    订单详情信息获取
-    自动进行 sign 签名并获取填充 accessToken
+
+###  <a name='funcGoodsDetail'></a> func GoodsDetail
+```
+note： 商品信息查询
+func GoodsDetail(goodsId, goodsIdOut string, showDraft bool) (SGoodsInfo, error)
 Return:  SDYOrderInfo, error
 ```

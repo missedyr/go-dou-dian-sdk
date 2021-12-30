@@ -7,6 +7,7 @@ import (
 
 // OrderDetail 获取订单详情
 // orderIdParent 	父订单号
+// https://op.jinritemai.com/docs/api-docs/15  订单详情查询 /order/orderDetail
 func (cl *DouDianClient) OrderDetail(orderIdParent string) (SDYOrderInfo, error) {
 	paramJson := map[string]interface{}{
 		"shop_order_id": orderIdParent,
