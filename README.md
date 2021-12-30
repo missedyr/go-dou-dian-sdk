@@ -7,6 +7,10 @@ go get github.com/xuexin520/go-dou-dian-sdk
 ##
 ### 使用示例
 ```go
+AppKey    string // 应用key
+AppSecret string // 应用秘钥
+ShopId    string // 店铺ID 仅自用型应用有效 若不传-则默认返回最早授权成功店铺对应的token信息
+
 douDianClient := douDianSdk.New(appKey, appSecret, shopId)
 douDianClient.OrderDetail("父订单号") // 获取订单详情
 douDianClient.GoodsDetail("商品id", "外部商品id", true) // 获取商品详情
