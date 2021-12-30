@@ -6,33 +6,32 @@ import (
 	"fmt"
 	"github.com/go-resty/resty/v2"
 	"github.com/sirupsen/logrus"
-	"github.com/xuexin520/go-dou-dian-sdk/sign"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
 )
 
-func FetchSignAndToken(method string, appKey string, appSecret string, shopId string, paramJson map[string]interface{}, httpMethod string) ([]byte, error) {
+func (cl *DouDianClient) FetchSignAndToken(method string, paramJson map[string]interface{}, httpMethod string) ([]byte, error) {
 	// 序列化参数
-	paramJsonStr := douDianSdk.Marshal(paramJson)
+	paramJsonStr := cl.SignMarshal(paramJson)
 
 	// 计算签名
 	timestamp := time.Now().Unix()
-	signVal := douDianSdk.Sign(appKey, appSecret, method, timestamp, paramJsonStr)
+	signVal := cl.Sign(cl.AppKey, cl.AppSecret, method, timestamp, paramJsonStr)
 
 	// 获取 accessToken
-	accessTokenData, err := GetAccessToken(appKey, appSecret, shopId)
+	accessTokenData, err := cl.GetAccessToken()
 	if err != nil || len(accessTokenData.AccessToken) == 0 {
 		logrus.Warnf("douDianSdk-->openHttp-->FetchSignAndToken 请求 method:%s 前置获取accessToken 失败")
 	}
 
 	// 执行API调用
-	return Fetch(method, timestamp, appKey, accessTokenData.AccessToken, signVal, paramJsonStr, httpMethod)
+	return cl.Fetch(method, accessTokenData.AccessToken, signVal, paramJsonStr, httpMethod, timestamp)
 }
 
 // Fetch 调用Open Api，取回数据
-func Fetch(method string, timestamp int64, appKey string, accessToken string, sign string, paramJson string, httpMethod string) ([]byte, error) {
+func (cl *DouDianClient) Fetch(method, accessToken, sign, paramJson, httpMethod string, timestamp int64) ([]byte, error) {
 	methodPath := strings.Replace(method, ".", "/", -1)
 
 	u := "https://openapi-fxg.jinritemai.com/" + methodPath
@@ -43,7 +42,7 @@ func Fetch(method string, timestamp int64, appKey string, accessToken string, si
 	params := map[string]string{
 		"v":            "2",
 		"method":       method,
-		"app_key":      appKey,
+		"app_key":      cl.AppKey,
 		"access_token": accessToken,
 		"timestamp":    strconv.FormatInt(timestamp, 10),
 		"sign":         sign,

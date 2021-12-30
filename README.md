@@ -5,6 +5,14 @@
 go get github.com/xuexin520/go-dou-dian-sdk
 
 ##
+### 使用示例
+```go
+douDianClient := douDianSdk.New(appKey, appSecret, shopId)
+douDianClient.OrderDetail("父订单号") // 获取订单详情
+douDianClient.GoodsDetail("商品id", "外部商品id", true) // 获取商品详情
+```
+
+##
 ### 签名算法
 * [func  Marshal](#FuncMarshal)
 * [func  Sign](#FuncSign)

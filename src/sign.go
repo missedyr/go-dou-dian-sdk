@@ -11,22 +11,22 @@ import (
 )
 
 // Sign 计算签名
-func Sign(appKey string, appSecret string, method string, timestamp int64, paramJson string) string {
+func (cl *DouDianClient) Sign(appKey string, appSecret string, method string, timestamp int64, paramJson string) string {
 	// 按给定规则拼接参数
 	paramPattern := "app_key" + appKey + "method" + method + "param_json" + paramJson + "timestamp" + strconv.FormatInt(timestamp, 10) + "v2"
 	signPattern := appSecret + paramPattern + appSecret
-	return Hmac(signPattern, appSecret)
+	return cl.SignHmac(signPattern, appSecret)
 }
 
-// Hmac 计算hmac
-func Hmac(s string, appSecret string) string {
+// SignHmac 计算hmac
+func (cl *DouDianClient) SignHmac(s string, appSecret string) string {
 	h := hmac.New(sha256.New, []byte(appSecret))
 	_, _ = h.Write([]byte(s))
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-// Marshal 序列化参数
-func Marshal(o interface{}) string {
+// SignMarshal 序列化参数
+func (cl *DouDianClient) SignMarshal(o interface{}) string {
 	// 序列化一次
 	raw, _ := json.Marshal(o)
 
