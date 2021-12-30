@@ -1,14 +1,22 @@
 package test
 
-//func main()  {
-//	appKey := ""
-//	appSecret := ""
-//	shopId := ""
-//	orderIdParent := ""
-//	logrus.Infof("1111111")
-//	accDa, err:= douDianSdk.GetAccessToken(appKey, appSecret, "")
-//	logrus.Infof("2222222", accDa, err)
-//
-//	orderInfo, _ := douDianSdk2.OrderDetail(appKey, appSecret, shopId, orderIdParent)
-//	logrus.Infof("333333", orderInfo, err)
-//}
+import (
+	"github.com/sirupsen/logrus"
+)
+
+func test() {
+	logrus.Infof("1111111")
+	//appKey := ""
+	//appSecret := ""
+	//shopId := ""
+	//douDianClient := douDianSdk.New(appKey, appSecret, shopId)
+
+	// token
+	//douDianClient.GetAccessToken()
+
+	// 订单详情
+	//douDianClient.OrderDetail("4871962930647831908")
+
+	// s商品详情
+	// douDianClient.GoodsDetail("", "0", false)
+}

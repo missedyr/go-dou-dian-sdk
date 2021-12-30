@@ -10,11 +10,13 @@ type SDYOrderInfo struct {
 }
 
 type SDYSkuOrderInfo struct {
-	Code            string `json:"code"`              // 商家后台商品编码 -- 配置洋葱商品ID
-	ItemNum         int64  `json:"item_num"`          // 订单商品数量
-	OriginAmount    int64  `json:"origin_amount"`     // 商品现价 (单件价格) 单位 分
 	OrderId         string `json:"order_id"`          // 子订单号 (商品订单号)
 	ParentOrderId   string `json:"parent_order_id"`   // 父订单号（店铺订单号）
+	ItemNum         int64  `json:"item_num"`          // 订单商品数量
+	ProductIdStr    string `json:"product_id_str"`    // 商品ID，字符串类型
+	ProductIdOut    string `json:"out_product_id"`    // 商品外部ID
+	Code            string `json:"code"`              // 商家后台商品编码 -- 配置洋葱商品ID
+	OriginAmount    int64  `json:"origin_amount"`     // 商品现价 (单件价格) 单位 分
 	OrderAmount     int64  `json:"order_amount"`      // 订单金额（单位 分）
 	PayAmount       int64  `json:"pay_amount"`        // 支付金额（单位 分）
 	OrderStatus     int64  `json:"order_status"`      // 订单状态
