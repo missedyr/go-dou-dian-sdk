@@ -9,7 +9,7 @@ import (
 // GoodsDetail 获取商品详情
 // goodsId    非必需 商品id
 // goodsIdOut 非必需 外部商品id
-// showDraft true：读取草稿数据；false：读取上架数据
+// showDraft true：读取草稿数据 false：读取上架数据
 // https://op.jinritemai.com/docs/api-docs/14    商品查询 /product/detail
 func (cl *DouDianClient) GoodsDetail(goodsId, goodsIdOut string, showDraft bool) (SGoodsInfo, error) {
 	paramJson := map[string]interface{}{
@@ -18,7 +18,7 @@ func (cl *DouDianClient) GoodsDetail(goodsId, goodsIdOut string, showDraft bool)
 	if goodsId != "" {
 		paramJson["product_id"] = goodsId
 	}
-	if goodsId != "" {
+	if goodsIdOut != "" {
 		paramJson["out_product_id"] = goodsIdOut
 	}
 
