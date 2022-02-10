@@ -81,7 +81,7 @@ Return:  SDYOrderInfo, error
 ```
 note： 订单-结算-详情-根据不同条件查询
 func OrderSettleDetail(params SOrderSettleDetailParams, printLog bool)
-Return:  []SOrderSettleDetail, error
+Return: SOrderSettleDetailData, error
 ```
 
 ###  <a name='funcOrderSettleDetailByOrderId'></a> func OrderSettleDetailByOrderId

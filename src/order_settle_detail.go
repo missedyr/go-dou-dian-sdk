@@ -8,16 +8,17 @@ import (
 
 func (cl *DouDianClient) OrderSettleDetailByOrderId(orderId string, printLog bool) ([]SOrderSettleDetail, error) {
 	params := SOrderSettleDetailParams{OrderId: orderId}
-	return cl.OrderSettleDetail(params, printLog)
+	data, err := cl.OrderSettleDetail(params, printLog)
+	return data.Data, err
 }
 
-func (cl *DouDianClient) OrderSettleDetail(params SOrderSettleDetailParams, printLog bool) ([]SOrderSettleDetail, error) {
-	var list []SOrderSettleDetail
+func (cl *DouDianClient) OrderSettleDetail(params SOrderSettleDetailParams, printLog bool) (SOrderSettleDetailData, error) {
+	var data SOrderSettleDetailData
 	// 参数验证
 	if len(params.OrderId) == 0 && (len(params.StartTime) == 0 || len(params.EndTime) == 0) {
 		errMsg := "OrderSettleDetail--params--err: orderId or (StartTime || EndTime) at least one cannot be empty"
 		logrus.Errorf(errMsg)
-		return list, errors.New(errMsg)
+		return data, errors.New(errMsg)
 	}
 
 	paramJson := map[string]interface{}{}
@@ -26,17 +27,11 @@ func (cl *DouDianClient) OrderSettleDetail(params SOrderSettleDetailParams, prin
 	method := "order.getSettleBillDetailV2"
 	respBodyData, err := cl.FetchSignAndToken(method, paramJson, "get")
 
-	type RespBody struct {
-		Code    int64                `json:"code"`
-		CodeMsg string               `json:"code_msg"`
-		Data    []SOrderSettleDetail `json:"data"`
-	}
-	var body RespBody
-	_ = json.Unmarshal(respBodyData, &body)
+	_ = json.Unmarshal(respBodyData, &data)
 	if printLog {
-		dataJson, _ := json.Marshal(body.Data)
-		logrus.Infof("douDianSdk-->OrderSettleDetail -- list:%v", string(dataJson))
+		dataJson, _ := json.Marshal(data)
+		logrus.Infof("douDianSdk-->OrderSettleDetail -- body:%v", string(dataJson))
 	}
-	logrus.Infof("douDianSdk-->OrderSettleDetail -- code:%d -- codeMsg: %s -- dataListCount: %d", body.Code, body.CodeMsg, len(body.Data))
-	return body.Data, err
+	logrus.Infof("douDianSdk-->OrderSettleDetail -- code:%d -- codeMsg: %s -- dataListCount: %d", data.Code, data.CodeMsg, len(data.Data))
+	return data, err
 }

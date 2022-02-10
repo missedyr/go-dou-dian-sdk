@@ -13,7 +13,16 @@ type SOrderSettleDetailParams struct {
 	StartIndex string `json:"start_index"` // 非必须 查询开始索引,值为上一次请求的结果next_start_index,第一次查询可以不填
 }
 
-// SOrderSettleDetail 订单结算详细信息
+type SOrderSettleDetailData struct {
+	Code           string               `json:"code"`
+	CodeMsg        string               `json:"code_msg"`
+	Data           []SOrderSettleDetail `json:"data"`             // 订单结算详情列表
+	IsEnd          int64                `json:"is_end"`           // 判断查询是否结束。0未结束, 1结束  未结束时-需要把next_start_index作为下一次请求的start_index,next_start_time作为下一次请求的start_time。
+	NextStartTime  string               `json:"next_start_time"`  // 下一次查询start_time
+	NextStartIndex string               `json:"next_start_index"` // 下一次查询start_index
+}
+
+// SOrderSettleDetail 订单结算详情
 type SOrderSettleDetail struct {
 	ShopId                 int64  `json:"shop_id"`                  // 店铺id
 	ProductId              string `json:"product_id"`               // 商品id
