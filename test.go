@@ -14,9 +14,13 @@ func test() {
 	// token
 	//douDianClient.GetAccessToken()
 
+	// s商品详情
+	// douDianClient.GoodsDetail("", "0", false)
+
 	// 订单详情
 	//douDianClient.OrderDetail("4871962930647831908")
 
-	// s商品详情
-	// douDianClient.GoodsDetail("", "0", false)
+	// 订单结算信息
+	//douDianClient.OrderSettleDetailByOrderId("", true)
+
 }

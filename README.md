@@ -26,12 +26,17 @@ douDianClient.GoodsDetail("商品id", "外部商品id", true) // 获取商品详
 * [func GetAccessToken](#funcGetAccessToken)
 
 ##
+### 商品API
+* [func GoodsDetail](#funcGoodsDetail)
+
+##
 ### 订单API
 * [func OrderDetail](#funcOrderDetail)
 
 ##
-### 商品API
-* [func GoodsDetail](#funcGoodsDetail)
+### 订单-结算-API
+* [func OrderSettleDetail](#funcOrderSettleDetail)
+* [func OrderSettleDetailByOrderId](#funcOrderSettleDetailByOrderId)
 
 ##
 ### func 描述
@@ -58,17 +63,30 @@ func GetAccessToken() (SAccessTokenData, error)
 Return:  SAccessTokenData, error
 ```
 
-###  <a name='funcOrderDetail'></a> func OrderDetail
-```
-note： 订单详情信息获取
-func OrderDetail(orderIdParent string) (SDYOrderInfo, error)
-Return:  SDYOrderInfo, error
-```
-
-
 ###  <a name='funcGoodsDetail'></a> func GoodsDetail
 ```
 note： 商品信息查询
-func GoodsDetail(goodsId, goodsIdOut string, showDraft bool) (SGoodsInfo, error)
+func GoodsDetail(goodsId, goodsIdOut string, showDraft bool)
 Return:  SDYOrderInfo, error
+```
+
+###  <a name='funcOrderDetail'></a> func OrderDetail
+```
+note： 订单详情信息获取
+func OrderDetail(orderIdParent string)
+Return:  SDYOrderInfo, error
+```
+
+###  <a name='funcOrderSettleDetail'></a> func OrderSettleDetail
+```
+note： 订单-结算-详情-根据不同条件查询
+func OrderSettleDetail(params SOrderSettleDetailParams, printLog bool)
+Return:  []SOrderSettleDetail, error
+```
+
+###  <a name='funcOrderSettleDetailByOrderId'></a> func OrderSettleDetailByOrderId
+```
+note： 订单-结算-详情-根据子订单号查询
+func OrderSettleDetailByOrderId(orderId string, printLog bool)
+Return:  []SOrderSettleDetail, error
 ```
