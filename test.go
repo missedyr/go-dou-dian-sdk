@@ -1,16 +1,11 @@
 package test
 
-import (
-	"github.com/sirupsen/logrus"
-	douDianSdk "github.com/xuexin520/go-dou-dian-sdk/src"
-)
-
 func test() {
-	logrus.Infof("1111111")
-	appKey := ""
-	appSecret := ""
-	shopId := ""
-	douDianClient := douDianSdk.New(appKey, appSecret, shopId)
+	//logrus.Infof("1111111")
+	//appKey := ""
+	//appSecret := ""
+	//shopId := ""
+	//douDianClient := douDianSdk.New(appKey, appSecret, shopId)
 
 	// token
 	//douDianClient.GetAccessToken()
@@ -22,6 +17,6 @@ func test() {
 	//douDianClient.OrderDetail("4871962930647831908")
 
 	// 订单结算信息
-	douDianClient.OrderSettleDetailByOrderId("", true)
+	//douDianClient.OrderSettleDetailByOrderId("", true)
 
 }

@@ -1,4 +1,4 @@
-module github.com/xuexin520/go-dou-dian-sdk
+module github.com/missedyr/go-dou-dian-sdk
 
 go 1.14
 
