@@ -2,7 +2,7 @@
 抖店-后端服务对接SDK-go语言
 
 ###  使用方法
-go get github.com/xuexin520/go-dou-dian-sdk
+go get github.com/missedyr/go-dou-dian-sdk
 
 ##
 ### 使用示例
